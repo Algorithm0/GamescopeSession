@@ -1,0 +1,6 @@
+[submodule "gamescope-session"]
+	path = gamescope-session
+	url = https://github.com/ChimeraOS/gamescope-session
+[submodule "gamescope-session-steam"]
+	path = gamescope-session-steam
+	url = git@github.com:Algorithm0/gamescope-session-steam.git
