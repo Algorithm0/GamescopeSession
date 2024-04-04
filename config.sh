@@ -133,6 +133,7 @@ if [ "${POSITIONAL_ARGS[0]}" = "update" ]; then
     echo "update base..."
     pushd gamescope-session || exit 1
       git reset --hard HEAD
+      git checkout main
       git pull
     popd || exit 1
   fi
@@ -141,6 +142,7 @@ if [ "${POSITIONAL_ARGS[0]}" = "update" ]; then
     echo "update module..."
     pushd gamescope-session-steam || exit 1
       git reset --hard HEAD
+      git checkout main
       git pull
     popd || exit 1
   fi
