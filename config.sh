@@ -20,6 +20,7 @@ install_base()
   sudo cp -f gamescope-session/usr/bin/export-gpu /usr/bin/export-gpu
   sudo cp -f gamescope-session/usr/bin/gamescope-session-plus /usr/bin/gamescope-session-plus
   sudo cp -f gamescope-session/usr/lib/systemd/user/gamescope-session-plus@.service /usr/lib/systemd/user/gamescope-session-plus@.service
+  sudo cp -f gamescope-session/usr/libexec/gamescope-sdl-workaround /usr/libexec/gamescope-sdl-workaround
   sudo mkdir -p /usr/share/gamescope-session-plus 
   sudo cp -f gamescope-session/usr/share/gamescope-session-plus/device-quirks /usr/share/gamescope-session-plus/device-quirks
   sudo cp -f gamescope-session/usr/share/gamescope-session-plus/gamescope-session-plus /usr/share/gamescope-session-plus/gamescope-session-plus 
@@ -54,7 +55,8 @@ remove_base()
 {
   sudo rm /usr/bin/export-gpu
   sudo rm /usr/bin/gamescope-session-plus
-  sudo rm /usr/lib/systemd/user/gamescope-session-plus@.service 
+  sudo rm /usr/lib/systemd/user/gamescope-session-plus@.service
+  sudo rm /usr/libexec/gamescope-sdl-workaround
   sudo rm -rf /usr/share/gamescope-session-plus 
 }
 
