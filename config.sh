@@ -5,7 +5,7 @@ usage()
   echo "Usage: $0 TARGET [OPTIONS]"
   echo ""
   echo "TARGETS:"
-  echo "  install                 - Install (reinstalls) the configuration for launching Steam in single mode. This is the default action."
+  echo "  install (default)       - Install (reinstalls) the configuration for launching Steam in single mode. This is the default action."
   echo "  clear                   - Removes the installation of this project."
   echo "  update                  - Updates the specified packages from the configuration."
   echo ""
@@ -79,7 +79,6 @@ remove_module()
   sudo rm /usr/share/wayland-sessions/gamescope-session.desktop
 }
 
-POSITIONAL_ARGS=()
 while [[ $# -gt 0 ]]; do
   case $1 in
     -m|--module)
@@ -99,22 +98,46 @@ while [[ $# -gt 0 ]]; do
       usage
       exit 1
     ;;
-    *)
-      POSITIONAL_ARGS+=("$1")
+    install)
+      if [ -n "$TARGET" ]; then
+        echo "Only one target is supported."
+        usage
+        exit 1
+      fi
+      TARGET="install"
       shift
     ;;
+    clear)
+      if [ -n "$TARGET" ]; then
+        echo "Only one target is supported."
+        usage
+        exit 1
+      fi
+      TARGET="clear"
+      shift
+    ;;
+    update)
+      if [ -n "$TARGET" ]; then
+        echo "Only one target is supported."
+        usage
+        exit 1
+      fi
+      TARGET="update"
+      shift
+    ;;
+    *)
+      echo "Unknown target: $1"
+      usage
+      exit 1
   esac
 done
 
-if [ -z "$MODES" ]; then
-  MODES="base module"
+if [ -z "$TARGET" ]; then
+  TARGET="install"
 fi
 
-TARGETS=("install" "clear" "update")
-if ! printf '%s\0' "${TARGETS[@]}" | grep -Fxqz -- "${POSITIONAL_ARGS[0]}"; then
-  echo "Unknown target: ${POSITIONAL_ARGS[0]}"
-  usage
-  exit 1;
+if [ -z "$MODES" ]; then
+  MODES="base module"
 fi
 
 function exists_in_list() {
@@ -130,7 +153,7 @@ function exists_in_list() {
     return 1
 }
 
-if [ "${POSITIONAL_ARGS[0]}" = "update" ]; then
+if [ "${TARGET}" = "update" ]; then
   if exists_in_list "$MODES" " " base; then
     echo "update base..."
     pushd gamescope-session || exit 1
@@ -151,7 +174,7 @@ if [ "${POSITIONAL_ARGS[0]}" = "update" ]; then
 fi
 
 
-if [ "${POSITIONAL_ARGS[0]}" != "clear" ]; then
+if [ "${TARGET}" != "clear" ]; then
   if exists_in_list "$MODES" " " base; then
     install_base
   fi
