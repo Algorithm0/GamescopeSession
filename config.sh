@@ -22,7 +22,9 @@ install_base()
   sudo cp -f gamescope-session/usr/lib/systemd/user/gamescope-session-plus@.service /usr/lib/systemd/user/gamescope-session-plus@.service
   sudo mkdir -p /usr/share/gamescope-session-plus 
   sudo cp -f gamescope-session/usr/share/gamescope-session-plus/device-quirks /usr/share/gamescope-session-plus/device-quirks
-  sudo cp -f gamescope-session/usr/share/gamescope-session-plus/gamescope-session-plus /usr/share/gamescope-session-plus/gamescope-session-plus 
+  sudo cp -f gamescope-session/usr/share/gamescope-session-plus/gamescope-session-plus /usr/share/gamescope-session-plus/gamescope-session-plus
+  sudo mkdir -p /usr/share/gamescope/scripts/50-custom
+  sudo cp -f gamescope-session/usr/share/gamescope/scripts/50-custom/50-disable-explicit-sync.lua /usr/share/gamescope/scripts/50-custom/50-disable-explicit-sync.lua
 }
 
 install_module()
@@ -52,11 +54,11 @@ install_module()
 
 remove_base()
 {
-  sudo rm /usr/bin/export-gpu
-  sudo rm /usr/bin/gamescope-session-plus
-  sudo rm /usr/lib/systemd/user/gamescope-session-plus@.service
-  sudo rm /usr/libexec/gamescope-sdl-workaround
-  sudo rm -rf /usr/share/gamescope-session-plus 
+  sudo rm -rf /usr/bin/export-gpu /usr/bin/gamescope-session-plus \
+              /usr/lib/systemd/user/gamescope-session-plus@.service \
+              /usr/libexec/gamescope-sdl-workaround \
+              /usr/share/gamescope \
+              /usr/share/gamescope-session-plus
 }
 
 remove_module()
