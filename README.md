@@ -31,5 +31,5 @@ Enjoy the game!
 ## Additions and recommendations
 - If you need more freedom to customize your gaming session, read about the configuration file [here](https://github.com/Algorithm0/gamescope-session/tree/main).
 And yes, you don't need to install this project itself if you followed the instructions - it's already installed.
-- Do you have an Xbox controller? Oh, you're in luck. [Read here](https://github.com/medusalix/xone).
+- Do you have an Xbox controller? Oh, you're in luck. [Read here](https://github.com/dlundqvist/xone).
 - Do you need a full-fledged gaming OS on Linux? Check out [ChimeraOS](https://chimeraos.org/)!
